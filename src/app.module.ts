@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
 import { PlazosModule } from './plazos/plazos.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -13,6 +15,10 @@ import { PlazosModule } from './plazos/plazos.module';
     ),
     ProductosModule,
     PlazosModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+      exclude: ['/api*'],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
