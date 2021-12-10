@@ -34,7 +34,7 @@ export class ProductosService {
   }
 
   async findByDesc(descripcion: string): Promise<Producto[]> {
-    const productos = await this.productoModel.find({ descripcion }).exec();
+    const productos = await this.productoModel.find({ descripcion: { $regex: '.*' + descripcion + '.*' } }).exec();
     if (productos.length > 0) {
       return productos;
     } else {
